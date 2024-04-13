@@ -48,5 +48,38 @@ const BookInfo = sequelize.define('book_info', {
     description: {type: DataTypes.STRING, allowNull: false},
 })
 
+const TypeBrand = sequelize.define('type_brand',{
+    id: {type: DataTypes.INTEGER, primaryKey: true, autoIncrement: true},
+})
+
+User.hasOne(Basket)
+Basket.belongsTo(User)
+
+User.hasMany(Rating)
+Rating.belongsTo(User)
+
+Basket.hasMany(BasketBook)
+BasketBook.belongsTo(Basket)
+
+Type.hasMany(Book)
+Book.belongsTo(Type)
+
+Brand.hasMany(Book)
+Book.belongsTo(Brand)
+
+Book.hasMany(Rating)
+Rating.belongsTo(Book)
+
+Book.hasMany(BasketBook)
+BasketBook.belongsTo(Book)
+
 Book.hasMany(BookInfo)
-BookInfo.belongsTo(Book) // связи в бд
+BookInfo.belongsTo(Book)
+
+Type.belongsToMany(Brand, {through: TypeBrand})
+Brand.belongsToMany(Type, {through: TypeBrand})
+
+
+module.exports = {
+    User, Basket, BasketBook, BookInfo, Book, Type,TypeBrand,Rating,Brand
+}
