@@ -18,7 +18,24 @@ class BookController {
 
     }
     async getAll(req,res){
-
+        let {brandId, typeId, limit, page} = req.query
+        page = page || 1
+        limit = limit || 9
+        let offset = page* limit - limit
+        let books;
+        if (!brandId && !typeId){
+            books = await Book.findAll({limit, offset})
+        }
+        if (brandId && !typeId){
+            books = await Book.findAll({where:{brandId},limit, offset})
+        }
+        if (!brandId && typeId){
+            books = await Book.findAll({where:{typeId},limit, offset})
+        }
+        if (brandId && typeId){
+            books = await Book.findAll({where:{brandId, typeId},limit, offset})
+        }
+        return res.json(books)
     }
     async getOne(req,res){
 
