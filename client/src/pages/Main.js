@@ -2,6 +2,7 @@ import React from 'react';
 import {Col, Container, Row} from "react-bootstrap";
 import TypeBar from "../components/TypeBar";
 import BrandBar from "../components/BrandBar";
+import BookList from "../components/BookList";
 
 const Main = () => {
     return (
@@ -12,6 +13,7 @@ const Main = () => {
                 </Col>
                 <Col md={9}>
                     <BrandBar/>
+                    <BookList/>
                 </Col>
             </Row>
         </Container>
